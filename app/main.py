@@ -6,13 +6,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
+WEATHER_API_URL = "http://api.weatherapi.com/v1/current.json"
+CITY_NAME = "Paris"
 
 
 def get_weather() -> None:
-    print("Performing request to Weather API for city Paris...")
-    url = "http://api.weatherapi.com/v1/current.json"
-    params = {"key": f"{API_KEY}", "q": "Paris", "aqi": "no"}
-    response = requests.get(url, params=params)
+    print(f"Performing request to Weather API for city {CITY_NAME}...")
+    params = {"key": f"{API_KEY}", "q": CITY_NAME, "aqi": "no"}
+    response = requests.get(WEATHER_API_URL, params=params)
     if response.status_code == 200:
         data = response.json()
         print(
